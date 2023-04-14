@@ -2,15 +2,20 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './styles/index.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { Provider } from "react-redux";
 import Header from './components/Header/header'
 import Footer from './components/Footer/footer'
 import Error from './pages/Erreur/erreur'
 import SignIn from './pages/SignIn/signIn'
 import Home from './pages/Home/home'
 import Profile from './pages/Profile/profile'
+import store from './store/store'
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
+  <Provider store={store}>
   <React.StrictMode>
     <Router>
       <Header />
@@ -23,4 +28,5 @@ root.render(
       <Footer />
     </Router>
   </React.StrictMode>
+  </Provider>
 )
