@@ -1,20 +1,24 @@
 import { useState } from 'react'
-import {getJwtToken, checkAuth} from '../../Service/authService'
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { getJwtToken } from '../../Service/authService'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 function SignInForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  
+
   const dispatch = useDispatch()
-  // const history = useHistory();
+  const navigate = useNavigate()
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    const auth = await getJwtToken(email, password)
-    console.log(auth)
-    // history.push('/profile');
+    try {
+      const auth = await getJwtToken(email, password)
+    } catch (error) {
+      console.error(error)
+    }
+    dispatch({ type: 'checkAuth' })
+    navigate('/profile')
   }
 
   return (

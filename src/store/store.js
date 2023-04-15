@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 
 const initialState = {
   auth: false,
-  isProfileDisplayed: false
+  isProfileDisplayed: false,
 }
 
 const checkAuth = { type: 'checkAuth' }
@@ -21,6 +21,7 @@ function profileReducer(state = initialState.isProfileDisplayed, action) {
   }
   return state;
 }
+
 
 const reducers = {
   auth: authReducer,

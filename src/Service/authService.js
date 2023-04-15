@@ -1,26 +1,26 @@
-function getJwtToken(email, password) {
-  fetch('http://localhost:3001/api/v1/user/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ email, password })
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      const jwt = data.body.token
-      console.log(jwt)
-      // checkAuth(jwt)
+async function getJwtToken(email, password) {
+  try {
+    const response = await fetch('http://localhost:3001/api/v1/user/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
     })
-    .catch((error) => {
-      // Une erreur s'est produite lors de la requête
-      console.error(error)
-    })
+    const data = await response.json()
+    const jwt = data.body.token
+    const message = await checkAuth(jwt)
+    return message
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 function checkAuth(jwt) {
-  fetch('http://localhost:3001/api/v1/user/profile', {
+  return fetch('http://localhost:3001/api/v1/user/profile', {
+    method: 'POST',
     headers: {
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${jwt}`
     }
   })
@@ -31,7 +31,6 @@ function checkAuth(jwt) {
       return response.json()
     })
     .then((data) => {
-      console.log(data)
       return data.message
     })
     .catch((error) => {
@@ -40,5 +39,3 @@ function checkAuth(jwt) {
 }
 
 export { getJwtToken, checkAuth }
-
-
