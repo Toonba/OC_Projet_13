@@ -1,3 +1,5 @@
+// mettre l'url de base de l'api dans une const
+
 async function getJwtToken(email, password) {
   try {
     const response = await fetch('http://localhost:3001/api/v1/user/login', {
@@ -8,9 +10,15 @@ async function getJwtToken(email, password) {
       body: JSON.stringify({ email, password })
     })
     const data = await response.json()
-    const jwt = data.body.token
-    const message = await checkAuth(jwt)
-    return message
+    if (data.body) {
+      let jwt = data.body.token
+      const message = await checkAuth(jwt)
+      return message
+    } else {
+      console.log('mauvais login =============')
+      const message = 'login failed'
+      return message
+    }
   } catch (error) {
     console.error(error)
   }
