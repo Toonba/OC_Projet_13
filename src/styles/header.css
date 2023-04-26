@@ -31,6 +31,16 @@
 .main-nav-item {
   text-decoration: none;
   margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.main-nav-item a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  margin-right: 0.5rem;
 }
 
 .main-nav-item:hover {

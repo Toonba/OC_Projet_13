@@ -1,8 +1,10 @@
 // mettre l'url de base de l'api dans une const
 
+const BASE_URL = 'http://localhost:3001/api/v1'
+
 async function getJwtToken(email, password) {
   try {
-    const response = await fetch('http://localhost:3001/api/v1/user/login', {
+    const response = await fetch(`${BASE_URL}/user/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -12,12 +14,12 @@ async function getJwtToken(email, password) {
     const data = await response.json()
     if (data.body) {
       let jwt = data.body.token
-      const message = await checkAuth(jwt)
-      return message
+      const authData = await checkAuth(jwt)
+      return { token: jwt, data: authData }
     } else {
       console.log('mauvais login =============')
-      const message = 'login failed'
-      return message
+      const authData = 'login failed'
+      return { token: authData, data: authData }
     }
   } catch (error) {
     console.error(error)
@@ -25,7 +27,7 @@ async function getJwtToken(email, password) {
 }
 
 function checkAuth(jwt) {
-  return fetch('http://localhost:3001/api/v1/user/profile', {
+  return fetch(`${BASE_URL}/user/profile`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -39,11 +41,34 @@ function checkAuth(jwt) {
       return response.json()
     })
     .then((data) => {
-      return data.message
+      return data
     })
     .catch((error) => {
       console.error(error)
     })
 }
 
-export { getJwtToken, checkAuth }
+async function updateProfile(firstName, lastName, jwt) {
+  try {
+    const response = await fetch(`${BASE_URL}/user/profile`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${jwt}`
+      },
+      body: JSON.stringify({ firstName, lastName })
+    })
+    const data = await response.json()
+    if (data.body) {
+      return data
+    } else {
+      console.log('Edit failled =============')
+      const message = 'edit failed'
+      return message
+    }
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export { getJwtToken, checkAuth, updateProfile }

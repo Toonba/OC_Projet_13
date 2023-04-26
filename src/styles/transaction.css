@@ -60,6 +60,10 @@
   color: #fff;
 }
 
+.notLogged {
+  color: red;
+}
+
 @media (min-width: 720px) {
   .account {
     flex-direction: row;

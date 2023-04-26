@@ -1,0 +1,37 @@
+.header {
+  color: #fff;
+  margin-bottom: 2rem;
+}
+.editName {
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  column-gap: 10px;
+}
+.editName .leftEdit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.editName input {
+  padding: 5px 10px;
+  margin-bottom: 10px;
+}
+
+.editName .rightEdit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.editName button {
+  padding: 8px;
+  font-size: 12px;
+  border: solid 1px #00bc77;
+  background-color: #fff;
+  color: #00bc77;
+}
