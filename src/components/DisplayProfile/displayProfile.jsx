@@ -54,12 +54,12 @@ function DisplayProfile() {
             <h2>Welcome back</h2>
             {edit ? (
               <form className="editName">
-                <div className="leftEdit">
+                <div className="nameInput">
                   <input type="text" id="firstName" placeholder={userName[0].firstName} onChange={(e) => setFirstName(e.target.value)} />
-                  <button onClick={handleSubmit}>Save</button>
-                </div>
-                <div className="rightEdit">
                   <input type="text" id="lastName" placeholder={userName[0].lastName} onChange={(e) => setLastName(e.target.value)} />
+                </div>
+                <div className="formButton">
+                  <button onClick={handleSubmit}>Save</button>
                   <button onClick={handleUndo}>Cancel</button>
                 </div>
               </form>

@@ -43,7 +43,7 @@
   margin-right: 0.5rem;
 }
 
-.main-nav-item:hover {
+.main-nav-item a:hover {
   text-decoration: underline;
 }
 
