@@ -8,7 +8,6 @@ import { authentification, user, storeToken } from '../../store/store'
 function Header() {
   const auth = useSelector((state) => state.auth)
   const userName = useSelector((state) => state.user)
-  const token = useSelector((state) => state.token)
   const dispatch = useDispatch()
 
   const handleSignOut = () => {

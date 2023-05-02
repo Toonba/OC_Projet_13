@@ -16,7 +16,6 @@ function SignInForm() {
     event.preventDefault()
     try {
       const result = await getJwtToken(email, password)
-      //comprend pas pourquoi token est undefined
       const token = result.token
       const authData = result.data
       if (authData.status === 200) {

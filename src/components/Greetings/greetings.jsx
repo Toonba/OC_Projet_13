@@ -1,13 +1,10 @@
-import TransactionData from '../../data/transactionData'
-import Transcation from '../../components/Transaction/Transaction'
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
 import { user } from '../../store/store'
 import { updateProfile } from '../../Service/authService'
-import '../../styles/displayProfile.css'
+import '../../styles/greetings.css'
 
-function DisplayProfile() {
-  const auth = useSelector((state) => state.auth)
+export function Greetings(){
   const userName = useSelector((state) => state.user)
   const token = useSelector((state) => state.token)
   const [edit, setEdit] = useState(false)
@@ -25,6 +22,7 @@ function DisplayProfile() {
     e.preventDefault()
     setEdit(false)
   }
+  
 
   // change name on the Global state + DB
   const handleSubmit = async (event) => {
@@ -45,12 +43,8 @@ function DisplayProfile() {
       console.error(error)
     }
   }
-
-  return (
-    <main className="main bg-dark">
-      {auth ? (
-        <>
-          <div className="header">
+  return(
+    <div className="header">
             <h2>Welcome back</h2>
             {edit ? (
               <form className="editName">
@@ -72,16 +66,5 @@ function DisplayProfile() {
               </button>
             )}
           </div>
-          <h2 className="sr-only">Accounts</h2>
-          {TransactionData.map((transaction, index) => (
-            <Transcation key={`${transaction.title}-${index}`} title={transaction.title} amount={transaction.amount} description={transaction.description} />
-          ))}
-        </>
-      ) : (
-        <h2 className="notLogged">You need to signIn to access your profile</h2>
-      )}
-    </main>
   )
 }
-
-export default DisplayProfile

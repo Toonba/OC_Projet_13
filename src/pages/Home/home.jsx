@@ -1,4 +1,4 @@
-import FeaturesSection from '../../components/Features/featuresSection'
+import FeaturesSection from '../../components/BanksFeatures/banksFeatures'
 import Hero from '../../components/Hero/hero'
 
 function Home() {
