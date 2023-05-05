@@ -5,7 +5,7 @@ import { updateProfile } from '../../Service/authService'
 import '../../styles/greetings.css'
 
 export function Greetings(){
-  const userName = useSelector((state) => state.user)
+  const userData = useSelector((state) => state.user)
   const token = useSelector((state) => state.token)
   const [edit, setEdit] = useState(false)
   const [firstName, setFirstName] = useState('')
@@ -29,10 +29,8 @@ export function Greetings(){
     event.preventDefault()
     try {
       const result = await updateProfile(firstName, lastName, token)
-      console.log(result, result.message)
-      console.log(firstName, lastName)
       if (result.status === 200) {
-        dispatch(user(result.body.firstName, result.body.lastName, true))
+        dispatch(user(result.body))
         setEdit(false)
       } else {
         // dispatch(user(firstName, lastName, true))
@@ -49,8 +47,8 @@ export function Greetings(){
             {edit ? (
               <form className="editName">
                 <div className="nameInput">
-                  <input type="text" id="firstName" placeholder={userName[0].firstName} onChange={(e) => setFirstName(e.target.value)} />
-                  <input type="text" id="lastName" placeholder={userName[0].lastName} onChange={(e) => setLastName(e.target.value)} />
+                  <input type="text" id="firstName" placeholder={userData.firstName} onChange={(e) => setFirstName(e.target.value)} />
+                  <input type="text" id="lastName" placeholder={userData.lastName} onChange={(e) => setLastName(e.target.value)} />
                 </div>
                 <div className="formButton">
                   <button onClick={handleSubmit}>Save</button>
@@ -58,7 +56,7 @@ export function Greetings(){
                 </div>
               </form>
             ) : (
-              <h2>{`${userName[0].firstName} ${userName[0].lastName}!`}</h2>
+              <h2>{`${userData.firstName} ${userData.lastName}!`}</h2>
             )}
             {edit ? null : (
               <button className="edit-button" onClick={handleEdit}>

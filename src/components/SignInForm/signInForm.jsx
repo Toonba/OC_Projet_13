@@ -17,10 +17,11 @@ function SignInForm() {
     try {
       const result = await getJwtToken(email, password)
       const token = result.token
-      const authData = result.data
-      if (authData.status === 200) {
+      const fetchStatus = result.data.status
+      const userData = result.data.body
+      if (fetchStatus === 200) {
         dispatch(authentification())
-        dispatch(user(authData.body.firstName, authData.body.lastName, false))
+        dispatch(user(userData))
         dispatch(storeToken(token))
         setStatus('loged')
         navigate('/profile')

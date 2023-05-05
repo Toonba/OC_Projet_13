@@ -1,5 +1,3 @@
-// mettre l'url de base de l'api dans une const
-
 const BASE_URL = 'http://localhost:3001/api/v1'
 
 async function getJwtToken(email, password) {
@@ -62,7 +60,6 @@ async function updateProfile(firstName, lastName, jwt) {
     if (data.body) {
       return data
     } else {
-      console.log('Edit failled =============')
       const message = 'edit failed'
       return message
     }

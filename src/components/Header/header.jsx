@@ -7,13 +7,13 @@ import { authentification, user, storeToken } from '../../store/store'
 
 function Header() {
   const auth = useSelector((state) => state.auth)
-  const userName = useSelector((state) => state.user)
+  const userData = useSelector((state) => state.user)
   const dispatch = useDispatch()
 
   const handleSignOut = () => {
     dispatch(authentification())
-    dispatch(user('','',false))
-    dispatch(storeToken())
+    dispatch(user(null))
+    dispatch(storeToken(null))
   }
 
   return (
@@ -27,7 +27,7 @@ function Header() {
           <div className="main-nav-item">
             <Link to="/profile">
               <i className="fa fa-user-circle"></i>
-              {`${userName[0].firstName}`}
+              {`${userData.firstName}`}
             </Link>
             <Link to="/" onClick={handleSignOut}>
               <i className="fa fa-sign-out"></i>
