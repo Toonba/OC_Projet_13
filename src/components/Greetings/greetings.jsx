@@ -33,7 +33,6 @@ export function Greetings(){
         dispatch(user(result.body))
         setEdit(false)
       } else {
-        // dispatch(user(firstName, lastName, true))
         setEdit(false)
         alert('Username update failed')
       }
