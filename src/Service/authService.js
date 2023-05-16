@@ -10,7 +10,7 @@ async function getJwtToken(email, password) {
       body: JSON.stringify({ email, password })
     })
     const data = await response.json()
-    if (data.body) {
+    if (data.status === 200) {
       let jwt = data.body.token
       const authData = await checkAuth(jwt)
       return { token: jwt, data: authData }
@@ -57,7 +57,7 @@ async function updateProfile(firstName, lastName, jwt) {
       body: JSON.stringify({ firstName, lastName })
     })
     const data = await response.json()
-    if (data.body) {
+    if (data.status === 200) {
       return data
     } else {
       const message = 'edit failed'
